@@ -147,7 +147,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/11/%E5%BF%AB%E6%8D%B7%E7%BF%BB%E8%AF%91/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/09/%E9%9A%8F%E8%AE%B0-%E9%9D%A2%E9%A6%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -161,7 +161,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/11/%E5%BF%AB%E6%8D%B7%E7%BF%BB%E8%AF%91/" class="post-title-link" itemprop="url">快捷翻译</a>
+            <a href="/2023/07/09/%E9%9A%8F%E8%AE%B0-%E9%9D%A2%E9%A6%86/" class="post-title-link" itemprop="url">随记-面馆</a>
         </h2>
 
         <div class="post-meta">
@@ -170,10 +170,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-07-11 19:51:32 / 修改时间：20:19:21" itemprop="dateCreated datePublished" datetime="2023-07-11T19:51:32+08:00">2023-07-11</time>
+              <time title="创建时间：2023-07-09 15:08:07" itemprop="dateCreated datePublished" datetime="2023-07-09T15:08:07+08:00">2023-07-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-19 15:36:26" itemprop="dateModified" datetime="2023-07-19T15:36:26+08:00">2023-07-19</time>
+              </span>
 
           
 
@@ -186,21 +192,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>为了方便快速将翻译软件安装并且将其离线翻译包快速部署到一个陌生的电脑上，我写了一个批处理文档。</p>
-<p>原理是将U盘上的有道翻译应用文件夹拷贝到电脑硬盘上并且将其离线翻译包拷贝到软件可识别位置。</p>
-<p>以下为实现方式：</p>
-<p>首先使用<code>vbe</code>实现隐藏执行批处理脚本<code>bat</code>文件:</p>
-<figure class="highlight plaintext"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)&#x27; 创建 Wscript.Shell 对象实例，用于与操作系统交互</span><br><span class="line">    ws.run &quot;cmd /c Auto2.bat&quot;,0&#x27; 运行Auto2.bat,0代表不显示窗口执行。</span><br><span class="line">    MsgBox(&quot;软件仅供学习参考使用，请不要使用该软件进行任何非法行为，尤其是作弊!&quot;),vbExclamation,&quot;注意&quot;&#x27; 弹出消息窗口，标题为注意。 </span><br></pre></td></tr></table></figure>
-
-<p>运行这个<code>vbe</code>文件后会启动主要复制程序：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off <span class="comment"># 关闭回显功能，不在命令执行时显示具体命令内容</span></span><br><span class="line">xcopy %~dp0\Datapage %UserProfile%\appdata\<span class="built_in">local</span> /e /Y /A <span class="comment"># 复制 %~dp0\Datapage 目录下的所有文件和子目录到当前用户的本地 appdata\local 目录中</span></span><br><span class="line">xcopy %~dp0\Main C:\ /e /Y /A <span class="comment"># 复制 %~dp0\Main 目录下的所有文件和子目录到 C:\ 目录中</span></span><br><span class="line">xcopy %~dp0\after.bat C:\ /Y /A <span class="comment"># 复制 %~dp0\after.bat 文件到 C:\ 目录中</span></span><br><span class="line">xcopy %~dp0\after.vbe C:\ /Y /A <span class="comment"># 复制 %~dp0\after.vbe 文件到 C:\ 目录中</span></span><br><span class="line"><span class="built_in">cd</span> /d C:\Application <span class="comment"># 切换当前工作目录到 C:\Application </span></span><br><span class="line">start YoudaoDict.exe <span class="comment"># 启动 YoudaoDict.exe 程序</span></span><br><span class="line"><span class="built_in">cd</span> /d C:\ <span class="comment"># 切换当前工作目录到 C:\</span></span><br><span class="line">start after.vbe <span class="comment"># 启动 after.vbe 程序</span></span><br><span class="line"><span class="built_in">exit</span> <span class="comment"># 退出脚本执行</span></span><br></pre></td></tr></table></figure>
-
-<p>此时翻译服务已经可以运行，在命令结束后会运行另一个自动删除程序：</p>
-<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27; 创建 Wscript.Shell 对象实例，用于与操作系统交互</span></span><br><span class="line"><span class="keyword">Set</span> ws = <span class="built_in">CreateObject</span>(<span class="string">&quot;Wscript.Shell&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27; 使用 Wscript.Shell 对象的 Run 方法执行命令行命令 &quot;cmd /c After.bat&quot;，并且不显示窗口</span></span><br><span class="line">ws.Run <span class="string">&quot;cmd /c After.bat&quot;</span>, <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27; 创建 Scripting.FileSystemObject 对象实例，用于进行文件系统操作</span></span><br><span class="line"><span class="keyword">Set</span> fso = <span class="built_in">CreateObject</span>(<span class="string">&quot;Scripting.FileSystemObject&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27; 使用 FileSystemObject 的 DeleteFile 方法删除当前脚本文件（即 WScript.ScriptName）</span></span><br><span class="line">f = fso.DeleteFile(WScript.ScriptName)</span><br></pre></td></tr></table></figure>
-
-<p>随后会执行一个<code>bat</code>文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> on</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 打开回显功能，命令执行时显示具体命令内容</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> 延迟执行，暂停脚本运行 20 秒钟</span><br><span class="line">ping -n 20 127.1 &gt;nul </span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 切换当前工作目录到 C:\</span></span><br><span class="line"><span class="string">cd /d C:\</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> 强制关闭名为 YoudaoDict.exe 的进程及其所有子进程</span><br><span class="line">taskkill /F /IM YoudaoDict.exe /T</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 延迟执行，暂停脚本运行 20 秒钟</span></span><br><span class="line"><span class="string">ping -n 20 127.1 &gt;nul</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> 递归删除 C:\Application 目录及其所有子目录和文件，不提示确认</span><br><span class="line">rd /s /q C:\Application</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 递归删除当前用户的本地 appdata\local\Yodao 目录及其所有子目录和文件，不提示确认</span></span><br><span class="line"><span class="string">rd /s /q %UserProfile%\appdata\local\Yodao</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> 删除当前脚本文件（即 %0）</span><br><span class="line">del %0</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 退出脚本执行</span></span><br><span class="line"><span class="string">exit</span></span><br></pre></td></tr></table></figure>
-
+          <p>我有一家很喜欢去吃的面馆，但是他关门了。有一次和家红修完美术大楼的电脑后和田老师一起去游泳，之后他带我们去的那家面馆给我留下了深刻的印象。</p>
+<p>他们家的面馆名字叫做东北水饺，说是水饺，其实菜单上更多的是炒面。老板一看就是东北人，一股浓浓东北味。我是很向往那边的，因为人们朴素，直爽。还在上中学的时候，课文里常常讲在东北下馆子老板会建议你少点一些菜，一是怕浪费，二是一份菜很多。而我们这边，老板希望你点很多因为这样给他带来的经济收益也很多，甚至为此他们会用点小技巧，一份菜的分量真的很让人感叹，可曾听闻肉炒芹菜？在家的是芹菜炒肉因为肉很多，在外面则是肉炒芹菜因为肉屈指可数。</p>
+<p>到那家面馆时，他们的面一上来就是一大盘，色香味一应俱全，分量很足，一份不管是大碗还是小碗都是一样的价格。好吃到一种地步，即是我敲下这些文字的时候都会联想起当时吃面的感觉。不得不谈的是他家的绿豆汤，很有意思！</p>
+<p>让人流连忘返啊，我经常拉着小郭一起去吃。她第一次去的时候大概也是觉得像是遇到宝藏店铺了吧，还给她室友分享来着。但是多去几次之后她便不喜欢了。</p>
+<p>因为这个，我很久都没有去他家了。直到大二假期来临，我准备去干点小事业而不得不和她分开的时候，我们说一起去吃一顿好的，在我的强拉下，她和我一起去了那家面馆。</p>
+<p>看了几眼没看到。</p>
+<p>最后发现被取下的招牌位置还残留有之前遮挡下来的灰尘，灰尘汇集的边缘呈现出几个字：</p>
+<p>”东北水饺“</p>
 
       
     </div>
@@ -251,7 +250,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-11 21:05:02" itemprop="dateModified" datetime="2023-07-11T21:05:02+08:00">2023-07-11</time>
+                <time title="修改时间：2023-07-19 15:35:15" itemprop="dateModified" datetime="2023-07-19T15:35:15+08:00">2023-07-19</time>
               </span>
 
           
@@ -265,7 +264,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>我记得曾经在网上看到的一些观点，大学生总说他们在忙，最后却不知道在忙什么<br>是的，我超级忙，自从当上了班长，麻烦事就越来越多，其实多半是班上的事情，后来是导员的事情，有些时候蛮多的，我有时候也在想，我这样做是为什么？后来经历了许多事情，我才知道这些事情都会在以后的某段时间助你一臂之力，我曾经遇到很多困难，有些甚至是自己一人之力无法越过的，我得到了很多帮助，说实话，能一步步走到今天，满是有许多人的帮助，不管是出于什么原因，他们给了我帮助，将期望放在我身上，我认为我不能浪费自己的能力与努力，至少做出点有意义的事情，有父母在生前遮挡风雨，有老师在生前提灯引路，有国家在前创造条件，先人尚在前行，晚辈岂可落下？<br>上一个项目很失败但这次的红色专项还算成功至少目前如此还有一些片段配图视频没有完善我有幸与国教的同学一起参加做了个项目从团队上来说如果有一些积极的成员占百分之五十以上时那么项目会很快的进展如果低于百分之三十那么压力会分布不平衡。<br>三创赛那个项目就很难受，大家都在摆或者是重点不在我们自己的项目上，所以压力都来到我这边，以至于后来直接向贺老师申请放弃。其实对我来说打击也挺大的，但是当时我所受到的压力有点吃不消了，当我选择放弃后，心中的大石轰然落下，虽然被指责一顿，但睡了个好觉。<br>这段时间两个项目堆到一起了，又遇上一周七天的课，每天都肝到两点刷视频到三点，不过好在收益挺多<br>加油吧，为了自己和相信我的人们。</p>
+          <p>我记得曾经在网上看到的一些观点，大学生总说他们在忙，最后却不知道在忙什么</p>
+<p>是的，我超级忙，自从当上了班长，麻烦事就越来越多，其实多半是班上的事情，后来是导员的事情，有些时候蛮多的，我有时候也在想，我这样做是为什么？后来经历了许多事情，我才知道这些事情都会在以后的某段时间助你一臂之力，我曾经遇到很多困难，有些甚至是自己一人之力无法越过的，我得到了很多帮助，说实话，能一步步走到今天，满是有许多人的帮助，不管是出于什么原因，他们给了我帮助，将期望放在我身上，我认为我不能浪费自己的能力与努力，至少做出点有意义的事情，有父母在生前遮挡风雨，有老师在生前提灯引路，有国家在前创造条件，先人尚在前行，晚辈岂可落下？</p>
+<p>上一个项目很失败但这次的红色专项还算成功至少目前如此还有一些片段配图视频没有完善我有幸与国教的同学一起参加做了个项目从团队上来说如果有一些积极的成员占百分之五十以上时那么项目会很快的进展如果低于百分之三十那么压力会分布不平衡。</p>
+<p>三创赛那个项目就很难受，大家都在摆或者是重点不在我们自己的项目上，所以压力都来到我这边，以至于后来直接向贺老师申请放弃。其实对我来说打击也挺大的，但是当时我所受到的压力有点吃不消了，当我选择放弃后，心中的大石轰然落下，虽然被指责一顿，但睡了个好觉。</p>
+<p>这段时间两个项目堆到一起了，又遇上一周七天的课，每天都肝到两点刷视频到三点，不过好在收益挺多</p>
+<p>加油吧，为了自己和相信我的人们。</p>
 
       
     </div>
@@ -381,7 +385,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-11 20:58:39" itemprop="dateModified" datetime="2023-07-11T20:58:39+08:00">2023-07-11</time>
+                <time title="修改时间：2023-07-19 15:34:45" itemprop="dateModified" datetime="2023-07-19T15:34:45+08:00">2023-07-19</time>
               </span>
 
           
@@ -395,7 +399,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>回想一下，这段时间我都干了什么？我追完了斗破苍穹的动画，又接着没更完的剧情，追完了漫画，甚至还想接着没更完的剧情去追小说，虽然停住了，但是时间已经耗去很多了。<br>我在打王者打联盟玩minecraft，耗着青春的一点一滴。我感觉，接着这样下去，会对不起自己和对自己抱有期望的人。我能深刻的认识到自己的错误，我就像在逃避一样，逃避最近的难事。我知道是没用的，甚至会将自己的未来搭进去。<br>对，我想跳出来，想一想，未来的美好与反差，还有自己的梦想，以及镜中的自己…<br>可是为什么总会摆烂呢？<br>尽管现在想的有多好，动力有多足，但过了两天就会躺平吧?<br>说白了就是自制力不够吧，冷静下来，现在种的因，未来吃的果，希望真的学会掌控自我。</p>
+          <p>回想一下，这段时间我都干了什么？我追完了斗破苍穹的动画，又接着没更完的剧情，追完了漫画，甚至还想接着没更完的剧情去追小说，虽然停住了，但是时间已经耗去很多了。</p>
+<p>我在打王者打联盟玩minecraft，耗着青春的一点一滴。我感觉，接着这样下去，会对不起自己和对自己抱有期望的人。我能深刻的认识到自己的错误，我就像在逃避一样，逃避最近的难事。我知道是没用的，甚至会将自己的未来搭进去。</p>
+<p>对，我想跳出来，想一想，未来的美好与反差，还有自己的梦想，以及镜中的自己…</p>
+<p>可是为什么总会摆烂呢？</p>
+<p>尽管现在想的有多好，动力有多足，但过了两天就会躺平吧?</p>
+<p>说白了就是自制力不够吧，冷静下来，现在种的因，未来吃的果，希望真的学会掌控自我。</p>
 
       
     </div>
@@ -446,7 +455,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-11 20:57:53" itemprop="dateModified" datetime="2023-07-11T20:57:53+08:00">2023-07-11</time>
+                <time title="修改时间：2023-07-19 15:35:03" itemprop="dateModified" datetime="2023-07-19T15:35:03+08:00">2023-07-19</time>
               </span>
 
           
@@ -460,7 +469,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>我参加了教师技能大赛！虽然我什么都不会。好在我有一个五一假期的准备。我该好好思考一下了。<br>它主要包含了教学设计，说课授课评课。主要知识点为高中，初中美术课的内容。<br>记得当时报名时，必胜的信心是蛮大的，正值五一劳动节，本想着在家五天的时间里可以干很多的事情，然后第一天早上，第二天早上，第三天准备好努力了，却和父母一起开车去逛游乐园去了。<br>那是一个亲子乐园，有很多无动力项目，但需要亲子间的合作才能玩下去。如果是和朋友一起的话，那也不错。本来应该是很好玩的，但是一开始就排了近乎一个小时的队进入了园区，顶着大太阳刚进去，就带着老妈去玩独木桥，老妈没掌握好平衡，玩的很吃力，以至于消耗了大部分体力。后来父母觉得年龄不合适，还不好意思玩。我一个人又玩不了双人项目，所以只能遗憾回家。如果范小也在的话，那就不一般了，唯一一件值得纪念的是那天（2023年5月1日）是我第一次开高速。<br>后来到家了，准备好好搞技能大赛时，又去追番了，决定第二天好好搞。<br>结果第二天去婆家了，一去就是一天，到了假期的最后一天时，花了一整个白天回学校，又花了一个傍晚搞党训试卷，花了一个深夜完成技能大赛的一小部分，第二天早上又起来疯狂的准备。<br>结果很明显，失败了。一败涂地，对我很有期望的任进老师也感到失望了。<br>怪就怪在太放纵自己了，自找的。若是长此以往，终将越落越远，无法自拔。</p>
+          <p>我参加了教师技能大赛！虽然我什么都不会。好在我有一个五一假期的准备。我该好好思考一下了。</p>
+<p>它主要包含了教学设计，说课授课评课。主要知识点为高中，初中美术课的内容。</p>
+<p>记得当时报名时，必胜的信心是蛮大的，正值五一劳动节，本想着在家五天的时间里可以干很多的事情，然后第一天早上，第二天早上，第三天准备好努力了，却和父母一起开车去逛游乐园去了。</p>
+<p>那是一个亲子乐园，有很多无动力项目，但需要亲子间的合作才能玩下去。如果是和朋友一起的话，那也不错。本来应该是很好玩的，但是一开始就排了近乎一个小时的队进入了园区，顶着大太阳刚进去，就带着老妈去玩独木桥，老妈没掌握好平衡，玩的很吃力，以至于消耗了大部分体力。后来父母觉得年龄不合适，还不好意思玩。我一个人又玩不了双人项目，所以只能遗憾回家。如果范小也在的话，那就不一般了，唯一一件值得纪念的是那天（2023年5月1日）是我第一次开高速。</p>
+<p>后来到家了，准备好好搞技能大赛时，又去追番了，决定第二天好好搞。</p>
+<p>结果第二天去婆家了，一去就是一天，到了假期的最后一天时，花了一整个白天回学校，又花了一个傍晚搞党训试卷，花了一个深夜完成技能大赛的一小部分，第二天早上又起来疯狂的准备。</p>
+<p>结果很明显，失败了。一败涂地，对我很有期望的任进老师也感到失望了。</p>
+<p>怪就怪在太放纵自己了，自找的。若是长此以往，终将越落越远，无法自拔。</p>
 
       
     </div>
@@ -480,7 +496,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/16/%E4%B8%BA%E7%90%86%E6%83%B3%E5%89%81%E6%89%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/20/%E5%BF%AB%E6%8D%B7%E7%BF%BB%E8%AF%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -494,7 +510,86 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/04/16/%E4%B8%BA%E7%90%86%E6%83%B3%E5%89%81%E6%89%8B/" class="post-title-link" itemprop="url">为理想剁手</a>
+            <a href="/2023/04/20/%E5%BF%AB%E6%8D%B7%E7%BF%BB%E8%AF%91/" class="post-title-link" itemprop="url">快捷翻译</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-20 19:51:32" itemprop="dateCreated datePublished" datetime="2023-04-20T19:51:32+08:00">2023-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-19 15:32:25" itemprop="dateModified" datetime="2023-07-19T15:32:25+08:00">2023-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>为了方便快速将翻译软件安装并且将其离线翻译包快速部署到一个陌生的电脑上，我写了一个批处理文档。</p>
+<p>原理是将U盘上的有道翻译应用文件夹拷贝到电脑硬盘上并且将其离线翻译包拷贝到软件可识别位置。</p>
+<p>以下为实现方式：</p>
+<p>首先使用<code>vbe</code>实现隐藏执行批处理脚本<code>bat</code>文件:</p>
+<figure class="highlight plaintext"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)&#x27; 创建 Wscript.Shell 对象实例，用于与操作系统交互</span><br><span class="line"></span><br><span class="line">    ws.run &quot;cmd /c Auto2.bat&quot;,0&#x27; 运行Auto2.bat,0代表不显示窗口执行。</span><br><span class="line"></span><br><span class="line">    MsgBox(&quot;软件仅供学习参考使用，请不要使用该软件进行任何非法行为，尤其是作弊!&quot;),vbExclamation,&quot;注意&quot;&#x27; 弹出消息窗口，标题为注意。 </span><br></pre></td></tr></table></figure>
+
+<p>运行这个<code>vbe</code>文件后会启动主要复制程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off <span class="comment"># 关闭回显功能，不在命令执行时显示具体命令内容</span></span><br><span class="line"></span><br><span class="line">xcopy %~dp0\Datapage %UserProfile%\appdata\<span class="built_in">local</span> /e /Y /A <span class="comment"># 复制 %~dp0\Datapage 目录下的所有文件和子目录到当前用户的本地 appdata\local 目录中</span></span><br><span class="line"></span><br><span class="line">xcopy %~dp0\Main C:\ /e /Y /A <span class="comment"># 复制 %~dp0\Main 目录下的所有文件和子目录到 C:\ 目录中</span></span><br><span class="line"></span><br><span class="line">xcopy %~dp0\after.bat C:\ /Y /A <span class="comment"># 复制 %~dp0\after.bat 文件到 C:\ 目录中</span></span><br><span class="line"></span><br><span class="line">xcopy %~dp0\after.vbe C:\ /Y /A <span class="comment"># 复制 %~dp0\after.vbe 文件到 C:\ 目录中</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /d C:\Application <span class="comment"># 切换当前工作目录到 C:\Application </span></span><br><span class="line"></span><br><span class="line">start YoudaoDict.exe <span class="comment"># 启动 YoudaoDict.exe 程序</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /d C:\ <span class="comment"># 切换当前工作目录到 C:\</span></span><br><span class="line"></span><br><span class="line">start after.vbe <span class="comment"># 启动 after.vbe 程序</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> <span class="comment"># 退出脚本执行</span></span><br></pre></td></tr></table></figure>
+
+<p>此时翻译服务已经可以运行，在命令结束后会运行另一个自动删除程序：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27; 创建 Wscript.Shell 对象实例，用于与操作系统交互</span></span><br><span class="line"><span class="keyword">Set</span> ws = <span class="built_in">CreateObject</span>(<span class="string">&quot;Wscript.Shell&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27; 使用 Wscript.Shell 对象的 Run 方法执行命令行命令 &quot;cmd /c After.bat&quot;，并且不显示窗口</span></span><br><span class="line">ws.Run <span class="string">&quot;cmd /c After.bat&quot;</span>, <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27; 创建 Scripting.FileSystemObject 对象实例，用于进行文件系统操作</span></span><br><span class="line"><span class="keyword">Set</span> fso = <span class="built_in">CreateObject</span>(<span class="string">&quot;Scripting.FileSystemObject&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27; 使用 FileSystemObject 的 DeleteFile 方法删除当前脚本文件（即 WScript.ScriptName）</span></span><br><span class="line">f = fso.DeleteFile(WScript.ScriptName)</span><br></pre></td></tr></table></figure>
+
+<p>随后会执行一个<code>bat</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> on</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 打开回显功能，命令执行时显示具体命令内容</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> 延迟执行，暂停脚本运行 20 秒钟</span><br><span class="line">ping -n 20 127.1 &gt;nul </span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 切换当前工作目录到 C:\</span></span><br><span class="line"><span class="string">cd /d C:\</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> 强制关闭名为 YoudaoDict.exe 的进程及其所有子进程</span><br><span class="line">taskkill /F /IM YoudaoDict.exe /T</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 延迟执行，暂停脚本运行 20 秒钟</span></span><br><span class="line"><span class="string">ping -n 20 127.1 &gt;nul</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> 递归删除 C:\Application 目录及其所有子目录和文件，不提示确认</span><br><span class="line">rd /s /q C:\Application</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 递归删除当前用户的本地 appdata\local\Yodao 目录及其所有子目录和文件，不提示确认</span></span><br><span class="line"><span class="string">rd /s /q %UserProfile%\appdata\local\Yodao</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> 删除当前脚本文件（即 %0）</span><br><span class="line">del %0</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; 退出脚本执行</span></span><br><span class="line"><span class="string">exit</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/16/%E9%9A%8F%E8%AE%B0-%E4%B8%BA%E7%90%86%E6%83%B3%E5%89%81%E6%89%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="BaiMiaoer">
+      <meta itemprop="description" content="我喜欢，观察世界，有时候观察更胜过于交互。好玩的事情总在身边！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="圣神白喵的知识宝库">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/16/%E9%9A%8F%E8%AE%B0-%E4%B8%BA%E7%90%86%E6%83%B3%E5%89%81%E6%89%8B/" class="post-title-link" itemprop="url">随记-为理想剁手</a>
         </h2>
 
         <div class="post-meta">
@@ -511,7 +606,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-11 19:50:25" itemprop="dateModified" datetime="2023-07-11T19:50:25+08:00">2023-07-11</time>
+                <time title="修改时间：2023-07-19 15:28:37" itemprop="dateModified" datetime="2023-07-19T15:28:37+08:00">2023-07-19</time>
               </span>
 
           
@@ -681,12 +776,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
